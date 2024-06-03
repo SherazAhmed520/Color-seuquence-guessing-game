@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Traffic Light Container</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer;
+        let redLight, yellowLight, greenLight;
+
+        function init() {
+            // Create scene
+            scene = new THREE.Scene();
+
+            // Create camera
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Create renderer
+            renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Create lights container
+            const lightsContainer = new THREE.Object3D();
+            scene.add(lightsContainer);
+
+            // Create red light
+            const redLightGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+            const redLightMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            redLight = new THREE.Mesh(redLightGeometry, redLightMaterial);
+            redLight.position.set(-1, 0, 0);
+            lightsContainer.add(redLight);
+
+            // Create yellow light
+            const yellowLightGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+            const yellowLightMaterial = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+            yellowLight = new THREE.Mesh(yellowLightGeometry, yellowLightMaterial);
+            yellowLight.position.set(0, 0, 0);
+            lightsContainer.add(yellowLight);
+
+            // Create green light
+            const greenLightGeometry = new THREE.SphereGeometry(0.3, 32, 32);
+            const greenLightMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+            greenLight = new THREE.Mesh(greenLightGeometry, greenLightMaterial);
+            greenLight.position.set(1, 0, 0);
+            lightsContainer.add(greenLight);
+
+            // Start animation
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener("load", () => {
+            init();
+        });
+    </script>
+</body>
+</html>

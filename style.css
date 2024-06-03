@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Gilroy";
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #000000;
+}
+
+#main {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#main h1 {
+  font-size: 50px;
+  text-transform: uppercase;
+  background: linear-gradient(to right, #30CFD0 0%, #8ed1db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#lightContainer {
+  width: 100px;
+  height: 300px;
+  background-color: #555;
+  border-radius: 50px;
+  padding: 9px;
+  border: 1px solid white;
+}
+
+#redLight {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin-bottom: 10px;
+  margin-top: 8px;
+}
+
+#yellowLight {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+#greenLight {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.mini-circles {
+  margin-top: 20px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.boxes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  width: 60%;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+}
+
+#playBtn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#resultMsg {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.win {
+  color: #4CAF50; /* Green */
+}
+
+.lose {
+  color: #FF0000; /* Red */
+}/*# sourceMappingURL=style.css.map */
