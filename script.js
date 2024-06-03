@@ -13,6 +13,16 @@ let score = 0;
 let lightInterval;
 let currentLightIndex = 0;
 
+// Add audio elements
+const lightSound = new Audio('light-sound.wav');
+const winSound = new Audio('win-sound.wav');
+const loseSound = new Audio('lose-sound.wav');
+
+// Custom modal elements
+let modal = document.getElementById("customModal");
+let modalText = document.getElementById("modalText");
+let span = document.getElementsByClassName("close")[0];
+
 function getRandomColor() {
     return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
 }
@@ -34,10 +44,14 @@ function startTraffic() {
             yellowLight.style.backgroundColor = currentLightIndex % 3 === 1 ? currentColor : body.style.backgroundColor;
             greenLight.style.backgroundColor = currentLightIndex % 3 === 2 ? currentColor : body.style.backgroundColor;
             setGlowingEffect(currentColor);
+            lightSound.play();  // Play light sound
             currentLightIndex++;
         } else {
             clearInterval(lightInterval);
             resetLights();
+            setTimeout(() => {
+                showModal("Instructions ", "Please select the color sequence with Drag and Drop the color square into circle...");
+            }, 500); // Show alert after lights turn off
         }
     }, 1000); // Change color every 1 second
 }
@@ -57,7 +71,6 @@ function resetLights() {
     yellowLight.style.boxShadow = "none";
     greenLight.style.boxShadow = "none";
 }
-
 
 function resetCirclesAndBoxes() {
     circles.forEach(circle => {
@@ -93,11 +106,11 @@ function checkSequence() {
     }
     score = matchedColors;
     if (matchedColors === 6) {
+        winSound.play();  // Play win sound
         resultMsg.innerHTML = `<span class='win'>Congratulations! You won! and your Score is: ${score}</span>`;
-
     } else if (userSequence.length === 6) {
+        loseSound.play();  // Play lose sound
         resultMsg.innerHTML = `<span class='lose'>You lose the game! and your Score is: ${score}</span>`;
-
     } else {
         resultMsg.innerHTML = `<span class='lose'>You didn't select any color!! and your Score is: ${score}</span>`;
     }
@@ -127,3 +140,19 @@ circles.forEach(circle => {
 boxes.forEach(box => {
     box.addEventListener("dragstart", drag);
 });
+
+// Modal functions
+function showModal(title, message) {
+    modalText.innerHTML = `<strong>${title}:</strong> ${message}`;
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
