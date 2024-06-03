@@ -49,7 +49,7 @@ function startTraffic() {
         } else {
             clearInterval(lightInterval);
             resetLights();
-            showModal("Tips", "Please select the color sequence and drag and drop the color square into circle...");
+            showModal("Instructions ", "Please select the color sequence and drag and drop the color square into circle...");
         }
     }, 1000); // Change color every 1 second
 }
@@ -111,10 +111,11 @@ function checkSequence() {
         resultMsg.innerHTML = `<span class='lose'>You lose the game! and your Score is: ${score}</span>`;
         showModal("Game Over", `You lose! Your score is: ${score}`);
         sounds.lose.play();
-    } else {
-        resultMsg.innerHTML = `<span class='lose'>You didn't select any color!! and your Score is: ${score}</span>`;
+    }else if (userSequence.length === currentLightIndex && currentLightIndex === 6 && !circles[5].style.backgroundColor) {
+        resultMsg.innerHTML = `<span class='lose'>You didn't select the complete sequence!! and your Score is: ${score}</span>`;
     }
 }
+
 
 playBtn.addEventListener("click", () => {
     generateTrafficColors();
